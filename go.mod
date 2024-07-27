@@ -1,4 +1,4 @@
-module pretty_logger
+module github.com/GoHippo/pretty_logger
 
 go 1.22.4
 

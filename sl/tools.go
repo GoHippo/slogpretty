@@ -1,12 +1,16 @@
 package sl
 
 import (
+	"fmt"
 	"log"
 	"log/slog"
 	"os"
 )
 
 func Err(err error) slog.Attr {
+	if err == nil {
+		err = fmt.Errorf("This error is nil")
+	}
 	return slog.Attr{
 		Key:   "error",
 		Value: slog.StringValue(err.Error()),

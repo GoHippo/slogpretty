@@ -1,0 +1,2 @@
+[01:55:18.514] INFO: Write in file only start! 
+[01:55:18.514] ERROR: Error test in file 

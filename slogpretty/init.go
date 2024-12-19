@@ -1,7 +1,7 @@
 package slogpretty
 
 import (
-	"fmt"
+	"github.com/GoHippo/slogpretty/slogpretty/STDLogger"
 	"log/slog"
 	"os"
 )
@@ -12,26 +12,20 @@ func SetupPrettySlog(level slog.Level) *slog.Logger {
 			Level: level,
 		},
 	}
-	
+
 	handler := opts.NewPrettyHandler(os.Stdout)
-	
+
 	return slog.New(handler)
 }
 
-func SetupPrettySlogInFile(level slog.Level, path_file string) *slog.Logger {
+func SetupPrettySlogInFile(level slog.Level, path_file string, terminal_write bool) *slog.Logger {
 	opts := PrettyHandlerOptions{
 		SlogOpts: &slog.HandlerOptions{
 			Level: level,
 		},
 	}
-	
-	file, err := os.OpenFile(path_file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		fmt.Println("Error opening file for logger:", err)
-		os.Exit(1)
-	}
-	
-	handler := opts.NewPrettyHandler(file)
-	
+
+	handler := opts.NewPrettyHandler(STDLogger.New(path_file, terminal_write))
+
 	return slog.New(handler)
 }
